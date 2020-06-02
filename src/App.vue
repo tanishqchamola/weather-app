@@ -5,7 +5,7 @@
         <input
           type="text"
           class="search-bar"
-          placeholder="Search..."
+          placeholder="Type a City"
           v-model="query"
           v-on:keypress="fetchWeather"
         />
@@ -18,7 +18,7 @@
         </div>
 
         <div class="weather-box">
-          <div class="temp">{{ Math.round(weather.main.temp) }} C</div>
+          <div class="temp">{{ Math.round(weather.main.temp) }}°C</div>
           <div class="weather">{{ weather.weather[0].main }}</div>
         </div>
       </div>
@@ -42,7 +42,9 @@ export default {
   methods: {
     fetchWeather(e) {
       if (e.key == "Enter") {
-        fetch(`${this.url_base}/weather?q=${this.query}&units=metric&appid=${this.api_key}`)
+        fetch(
+          `${this.url_base}/weather?q=${this.query}&units=metric&appid=${this.api_key}`
+        )
           .then(res => {
             return res.json();
           })
@@ -53,7 +55,7 @@ export default {
       this.weather = results;
     },
     date() {
-      return moment().format('dddd, MMMM DD YYYY');
+      return moment().format("dddd, MMMM DD YYYY");
     }
   }
 };
@@ -65,9 +67,13 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
+  max-width: 500px;
+  margin: auto;
 }
+
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -76,9 +82,11 @@ body {
   background-position: bottom;
   transition: 1s;
 }
+
 #app.warm {
-  background-image: url('./assets/warm-bg.jpg');
+  background-image: url("./assets/warm-bg.jpg");
 }
+
 main {
   min-height: 100vh;
   padding: 25px;
@@ -88,8 +96,10 @@ main {
     rgba(0, 0, 0, 0.75)
   );
 }
+
 .search-box {
-  width: 100%;
+  width: 95%;
+  margin: auto;
   margin-bottom: 30px;
 }
 
@@ -98,8 +108,9 @@ main {
   width: 100%;
   padding: 15px;
 
-  color: #313131;
+  color: #212121;
   font-size: 20px;
+  text-align: center;
 
   appearance: none;
   border: none;
@@ -108,29 +119,29 @@ main {
 
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 0px 16px 0px 16px;
+  border-radius: 8px;
   transition: 0.4s;
 }
 
 .search-box .search-bar:focus {
-  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
   background-color: rgba(255, 255, 255, 0.75);
-  border-radius: 16px 0px 16px 0px;
 }
+
 .location-box .location {
-  color: #fff;
+  color: #343a40;
   font-size: 32px;
   font-weight: 500;
   text-align: center;
-  text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
 }
+
 .location-box .date {
-  color: #fff;
+  color: #6c757d;
+  margin-top: 15px;
   font-size: 20px;
-  font-weight: 300;
-  font-style: italic;
+  font-weight: 500;
   text-align: center;
 }
+
 .weather-box {
   text-align: center;
 }
@@ -142,19 +153,15 @@ main {
   font-size: 102px;
   font-weight: 900;
 
-  text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
   background-color: rgba(255, 255, 255, 0.25);
-  border-radius: 16px;
+  backdrop-filter: blur(1px);
+  border-radius: 10px;
   margin: 30px 0px;
-
-  box-shadow: 3px 6px rgba(0, 0, 0, 0.25);
 }
 
 .weather-box .weather {
   color: #fff;
   font-size: 48px;
-  font-weight: 700;
-  font-style: italic;
-  text-shadow: 3px 6px rgb(0, 0, 0, 0.25);
+  font-weight: 600;
 }
 </style>
