@@ -1,4 +1,4 @@
-# word-translator
+# Weather App˝
 
 ## Project setup
 ```
